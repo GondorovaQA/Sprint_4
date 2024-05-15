@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -37,9 +39,8 @@ public class OrderPageTest {
 
     @Test
     public void sendOrderUP() {
-        System.setProperty("webdriver.gecko.driver", "C:\\WebDriverFireFox\\bin\\geckodriver.exe");
-        FirefoxOptions options = new FirefoxOptions();
-        driver = new FirefoxDriver(options);
+        ChromeOptions options = new ChromeOptions();
+        driver = new ChromeDriver(options);
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
         MainPage objMainPage = new MainPage(driver);
@@ -70,9 +71,8 @@ public class OrderPageTest {
 
     @Test
     public void sendOrderDown() {
-        System.setProperty("webdriver.gecko.driver", "C:\\WebDriverFireFox\\bin\\geckodriver.exe");
-        FirefoxOptions options = new FirefoxOptions();
-        driver = new FirefoxDriver(options);
+        ChromeOptions options = new ChromeOptions();
+        driver = new ChromeDriver(options);
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
         MainPage objMainPage = new MainPage(driver);
