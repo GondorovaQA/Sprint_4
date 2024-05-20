@@ -1,33 +1,39 @@
 import PageObject.MainPage;
-import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 
-public class MainPageTest {
-    private WebDriver driver;
+
+public class MainPageTest extends Annotations {
 
     @Test
-    public void checkTextDropDown() {
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+    public void checkTextDropDownPrice() {
         MainPage objMainPage = new MainPage(driver);
-
         driver.findElement(By.xpath("//*[@id='rcc-confirm-button']")).click();
-        objMainPage.clickButtonDropDown();
-        objMainPage.checkTextDropDown();
 
+        objMainPage.clickButtonDropDownPrice();
+        objMainPage.checkTextDropDownPrice();
 
-    }
+        objMainPage.clickButtonDropDownSomeScooter();
+        objMainPage.checkTextDropDownSomeScooter();
 
-    @After
-    public void teardown() {
-        // Закрой браузер
-        driver.quit();
+        objMainPage.clickButtonDropDownRentalTime();
+        objMainPage.checkTextDropDownRentalTime();
+
+        objMainPage.clickButtonDropDownOrderToDay();
+        objMainPage.checkTextDropDownOrderToDay();
+
+        objMainPage.clickButtonDropDownExtendOrder();
+        objMainPage.checkTextDropDownExtendOrder();
+
+        objMainPage.clickButtonDropDownCharge();
+        objMainPage.checkTextDropDownCharge();
+
+        objMainPage.clickButtonDropDownCancelOrder();
+        objMainPage.checkTextDropDownCancelOrder();
+
+        objMainPage.clickButtonDropDownMkad();
+        objMainPage.checkTextDropDownMkad();
     }
 }
 

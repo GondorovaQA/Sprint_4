@@ -1,10 +1,12 @@
 package PageObject;
 
+import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import java.time.Duration;
 
@@ -32,7 +34,7 @@ public class RentPage {
     // Локатор для всплывающего окна и клика по кнопке "Да"
     private By buttonYes = By.xpath("//*[@id='root']/div/div[2]/div[5]/div[2]/button[2]");
     // Локатор для проверки отображения всплывающего окна "Заказ оформляется"
-    private By orderIsProcessed = By.className("Order_Modal__YZ-d3");
+    private By orderIsProcessed = By.className("Order_ModalHeader__3FDaJ");
 
     public void clickInputCalendar() {
         driver.findElement(inputCalendar).click();
@@ -67,17 +69,15 @@ public class RentPage {
     }
 
     public void checkOrderIsProcessed() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(orderIsProcessed));
-
-        WebElement orderModal = driver.findElement(orderIsProcessed);
-        if (orderModal!= null) {
-            System.out.println("Заказ оформляется.");
-        } else {
-            System.out.println("Модальное окно с обработкой заказа не найдено на странице.");
-        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebElement orderElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("Order_ModalHeader__3FDaJ")));
+        String actualText = orderElement.getText();
+        boolean startsWithExpectedMessage = actualText.startsWith("Заказ оформлен");
+        Assert.isTrue(startsWithExpectedMessage, "Текст не начинается с 'Заказ оформлен'.");
     }
 
 
 }
+
+
 

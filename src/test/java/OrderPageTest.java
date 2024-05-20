@@ -1,48 +1,37 @@
 import PageObject.MainPage;
 import PageObject.OrderPage;
 import PageObject.RentPage;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-
-
 import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class OrderPageTest {
+public class OrderPageTest extends Annotations {
 
-    private WebDriver driver;
     private String name;
     private String surName;
+    private String phoneNumber;
 
-    public OrderPageTest(String name, String surName) {
+    public OrderPageTest(String name, String surName,String phoneNumber) {
         this.name = name;
         this.surName = surName;
+        this.phoneNumber = phoneNumber;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"Ольга", "Гондорова"},
-                {"Иван", "Иванов"},
-                {"Алексей", "Пупкин"}
+                {"Ольга", "Гондорова", "+79114805632"},
+                {"иван", "иванов", "79114805632"},
+                {"Alex", "Pupkin", "(4012)584295"}
         });
     }
 
     @Test
     public void sendOrderUP() {
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-
         MainPage objMainPage = new MainPage(driver);
         driver.findElement(By.xpath("//*[@id='rcc-confirm-button']")).click();
         objMainPage.clickButtonOrderUp();
@@ -53,7 +42,7 @@ public class OrderPageTest {
         objOrderPage.setInputAddress("Калининград, Ялтинская улица, 72");
         objOrderPage.clickInputMetroStation();
         objOrderPage.clickDropDownMetroStation();
-        objOrderPage.setInputPhoneNumber("89114612680");
+        objOrderPage.setInputPhoneNumber(phoneNumber);
         objOrderPage.clickButtonContinue();
 
         RentPage objRentPage = new RentPage(driver);
@@ -71,9 +60,7 @@ public class OrderPageTest {
 
     @Test
     public void sendOrderDown() {
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver(options);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+
 
         MainPage objMainPage = new MainPage(driver);
         driver.findElement(By.xpath("//*[@id='rcc-confirm-button']")).click();
@@ -85,7 +72,7 @@ public class OrderPageTest {
         objOrderPage.setInputAddress("Калининград, Ялтинская улица, 72");
         objOrderPage.clickInputMetroStation();
         objOrderPage.clickDropDownMetroStation();
-        objOrderPage.setInputPhoneNumber("89114612680");
+        objOrderPage.setInputPhoneNumber(phoneNumber);
         objOrderPage.clickButtonContinue();
 
         RentPage objRentPage = new RentPage(driver);
@@ -101,8 +88,4 @@ public class OrderPageTest {
 
     }
 
-    @After
-    public void teardown() {
-        driver.quit();
-    }
 }
