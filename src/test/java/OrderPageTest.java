@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class OrderPageTest extends Annotations {
+public class OrderPageTest extends BaseTest {
 
     private String name;
     private String surName;
