@@ -33,7 +33,6 @@ public class OrderPageTest extends BaseTest {
     @Test
     public void sendOrderUP() {
         MainPage objMainPage = new MainPage(driver);
-        driver.findElement(By.xpath("//*[@id='rcc-confirm-button']")).click();
         objMainPage.clickButtonOrderUp();
 
         OrderPage objOrderPage = new OrderPage(driver);
@@ -63,7 +62,6 @@ public class OrderPageTest extends BaseTest {
 
 
         MainPage objMainPage = new MainPage(driver);
-        driver.findElement(By.xpath("//*[@id='rcc-confirm-button']")).click();
         objMainPage.clickButtonOrderDown();
 
         OrderPage objOrderPage = new OrderPage(driver);
